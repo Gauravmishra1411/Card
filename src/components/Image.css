@@ -1,0 +1,19 @@
+.image_tag{
+    margin-top: 1rem;
+    margin-left:20rem;
+    width: 44rem;
+    height: 24rem;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+.card{
+    margin: 2px;
+    border: 2px solid red;
+    width: 10rem;
+    height: 8rem;
+
+}
+.discript{
+    border: 2px solid palevioletred;
+}

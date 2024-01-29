@@ -1,25 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+// import React from "react";
+// import ReactDOM from "react-dom/client";
+// import top from "./top";
+// import filter from "./filter";
 
-function App() {
+// const AppLayout = () => {
+//   return (
+//     <>
+//        <top/>
+//        <filter/>
+//     </>
+//   );
+// };
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<AppLayout />);
+// export default App;
+
+
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import Top from "./top";
+// import Filter from "./filter";
+
+// const AppLayout = () => {
+//   return (
+//     <>
+//        <Top />
+//        <Filter />
+//     </>
+//   );
+// };
+
+// ReactDOM.render(<AppLayout />, document.getElementById("root"));
+import React from "react";
+import  {  useState } from "react";
+import { useEffect } from "react";
+import ReactDOM from "react-dom";
+import Top from "./components/top";
+import {Image} from "./components/image";
+import {Filter} from "./components/filter";
+import { filterData,apiUrl } from "./Data";
+import { Toast } from "react-toastify/dist/components";
+
+const AppLayout = () => {
+  const [dataItem,setdataItem]=useState("");
+  useEffect (()=>{
+    const fetchData=async()=>{
+      try{
+        // calling apiurl ko
+        const res=await fetch(apiUrl);
+        // data formater
+        const output=await res.json();
+        // tosave 
+        setdataItem(output.data);
+        // data save variable is dataItem
+      }
+      catch(error){
+        Toast.error("Something went to wrong");
+      }
+    }
+  },[]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+       <Top />
+       <Filter 
+      //  props
+       filterData={filterData}/>
+       <Image 
+       dataItem={dataItem}/>
+    </>
   );
-}
+};
 
-export default App;
+export default AppLayout;
+
+ReactDOM.render(<AppLayout />, document.getElementById("root"));
+
